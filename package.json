@@ -1,6 +1,6 @@
 {
   "homepage": "https://patelhit125.github.io/find-book/",
-  "name": "coronatable",
+  "name": "find-book",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

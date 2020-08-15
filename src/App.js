@@ -23,54 +23,72 @@ const App = () => {
   };
 
   const bookAuthors = authors => {
-    if (authors.length <= 2) {
-      authors = authors.join(" and ");
-    } else if (authors.length > 2) {
-      let lastAuthor = " and " + authors.slice(-1);
-      authors.pop();
-      authors = authors.join(", ");
-      authors += lastAuthor;
+    try {
+      if (authors.length <= 2) {
+        authors = authors.join(" and ");
+      }
+      else if (authors.length > 2) {
+        let lastAuthor = " and " + authors.slice(-1);
+        authors.pop();
+        authors = authors.join(", ");
+        authors += lastAuthor;
+      }
+      return authors;
     }
-    return authors;
+    catch (error) {
+      return <span>null</span>;
+    }
   };
+
+  const getRating = ratings => {
+    if (ratings) {
+      return ratings;
+    }
+    else {
+      return <span>null</span>
+    }
+  }
 
   return (
     <div className="container mt-5">
       <form onSubmit={onSubmitHandler}>
-      <div class="form-group">
-      <label for="bookInput">Enter Book Name</label>
+        <div className="form-group">
+          <label htmlFor="bookInput">Enter Book Name</label>
           <input className="form-control" id="bookInput"
             type="search"
-            placeholder="microservice, restful design, etc.,"
+            placeholder="java, python, etc.,"
             value={searchTerm}
             onChange={onInputChange}
           />
-          </div>
-          <button type="submit"  className="btn btn-primary">Search</button>
+        </div>
+        <button type="submit" className="btn btn-primary">Search</button>
       </form>
       <ul className="list-group list-group-flush mt-5 mb-5">
-        {books.items.map((book, index) => {
+        {books.items ? books.items.map((book, index) => {
           return (
             <li key={index} className="list-group-item d-flex bg-light">
+              <a href={`http://books.google.co.in/books?id=${book.id}`} target="_blank" rel="noopener noreferrer">
                 <img
                   width="130"
                   height="200"
                   alt={`${book.volumeInfo.title} book`}
                   src={`http://books.google.com/books/content?id=${
                     book.id
-                  }&printsec=frontcover&img=1&zoom=1&source=gbs_api`}
+                    }&printsec=frontcover&img=1&zoom=1&source=gbs_api`}
                 />
-                <span className="ml-3">
-                  <div className="font-weight-bold">{book.volumeInfo.title}</div>
-                  <div className="mt-3">Author : {bookAuthors(book.volumeInfo.authors)}</div>
-                  <div>Published Date : {book.volumeInfo.publishedDate}</div>
-                  <div>Total Pages : {book.volumeInfo.pageCount}</div>
-                  <div>Rating : {book.volumeInfo.averageRating}/5</div>
-                  <div>Language : {book.volumeInfo.language}</div>
-                </span>
+              </a>
+              <span className="ml-3">
+                <div className="font-weight-bold">
+                  <a href={`http://books.google.co.in/books?id=${book.id}`} target="_blank" rel="noopener noreferrer">{book.volumeInfo.title}</a>
+                </div>
+                <div className="mt-3">Author : {bookAuthors(book.volumeInfo.authors)}</div>
+                <div>Published Date : {book.volumeInfo.publishedDate}</div>
+                <div>Total Pages : {book.volumeInfo.pageCount}</div>
+                <div>Rating : {getRating(book.volumeInfo.averageRating)}/5</div>
+              </span>
             </li>
           );
-        })}
+        }) : <span className="text-danger">Try different keyword...</span>}
       </ul>
     </div>
   );

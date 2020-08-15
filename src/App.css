@@ -10275,3 +10275,11 @@ body, html {
 .font-weight-bold {
   font-family: 'Brown-Bold', sans-serif;
 }
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+}
