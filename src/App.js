@@ -79,10 +79,12 @@ const App = () => {
               </a>
               <span className="ml-3">
                 <div className="font-weight-bold">
-                  <a href={`http://books.google.co.in/books?id=${book.id}`} target="_blank" rel="noopener noreferrer">{book.volumeInfo.title}</a>
+                  <a href={`http://books.google.co.in/books?id=${book.id}`} target="_blank" rel="noopener noreferrer">
+                    {book.volumeInfo.title}
+                    <div>By {bookAuthors(book.volumeInfo.authors)}</div>
+                  </a>
                 </div>
-                <div className="mt-3">Author : {bookAuthors(book.volumeInfo.authors)}</div>
-                <div>Published Date : {book.volumeInfo.publishedDate}</div>
+                <div className="mt-3">Published Date : {book.volumeInfo.publishedDate}</div>
                 <div>Total Pages : {book.volumeInfo.pageCount}</div>
                 <div>Rating : {getRating(book.volumeInfo.averageRating)}/5</div>
               </span>
