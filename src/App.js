@@ -78,9 +78,17 @@ const App = () => {
                 />
               </a>
               <span className="ml-3">
+<<<<<<< HEAD
                 <div>
                   <a className="font-weight-bold" href={`http://books.google.co.in/books?id=${book.id}`} target="_blank" rel="noopener noreferrer">{book.volumeInfo.title}</a>
                   <div>By {bookAuthors(book.volumeInfo.authors)}</div>
+=======
+                <div className="font-weight-bold">
+                  <a href={`http://books.google.co.in/books?id=${book.id}`} target="_blank" rel="noopener noreferrer">
+                    {book.volumeInfo.title}
+                    <div>By {bookAuthors(book.volumeInfo.authors)}</div>
+                  </a>
+>>>>>>> 01f4ddfee572ac985c9e35d1d75a7a84733cbde5
                 </div>
                 <div className="mt-3">Published Date : {book.volumeInfo.publishedDate}</div>
                 <div>Total Pages : {book.volumeInfo.pageCount}</div>
